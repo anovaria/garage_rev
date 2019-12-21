@@ -8,7 +8,7 @@ public class Garage {
 
     final static int MAX = 4;
     Veicolo elencoVeicoli[] = new Veicolo[MAX];
-    Veicolo elencoVeicoli2[] = new Veicolo[MAX];
+
     /**
      *
      * @param args
