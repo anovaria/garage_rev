@@ -98,8 +98,9 @@ class Veicolo {
 
 class Auto extends Veicolo {
 
+
     public static enum Alimentazione {
-        BENZINA, DIESEL
+        B, D
     }
     private int porte;
     //public String alim;

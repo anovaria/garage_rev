@@ -24,8 +24,17 @@ char ch,scelta;
 int i,j=0;
 V T[] = new V[max]; //istanziazione del vettore
 do{
-   System.out.print("m,a,f?:");ch=in.next().charAt(0);
+    System.out.print("m,a,f?:");
+    try {
+        ch=in.next().charAt(0);
+    } catch (Exception e) {
+        throw new IllegalArgumentException("errore");
+    }
+   try {
    System.out.print("marca:");mar=in.next();    System.out.print("anno:");year=in.nextInt();    System.out.print("cilindrata:");cil=in.nextInt();
+} catch (Exception e) {
+        throw new IllegalArgumentException("errore");
+    }
    switch(ch){
       case 'a':{
       System.out.print("porte:"); par4=in.nextInt();       System.out.print("diesel o benzina?(d/b):");
