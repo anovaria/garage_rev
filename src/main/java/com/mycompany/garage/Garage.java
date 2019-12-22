@@ -1,4 +1,5 @@
 package com.mycompany.garage;
+import java.util.Scanner;
 import org.apache.commons.lang.ArrayUtils;
 /**
  *
@@ -21,7 +22,7 @@ public class Garage {
        
         //inserisco veicoli 
         //throw new IllegalArgumentException("errore");
-        java.util.Scanner sc = new java.util.Scanner(System.in);
+        Scanner sc = new java.util.Scanner(System.in);
         System.out.println("dimmi alimentazione?");
         Auto.Alimentazione alimentazione = null;
         boolean invalid;
