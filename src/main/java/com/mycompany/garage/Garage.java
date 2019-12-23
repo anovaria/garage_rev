@@ -1,7 +1,8 @@
 package com.mycompany.garage;
-import static java.lang.System.in;
+
 import java.util.Scanner;
 import org.apache.commons.lang.ArrayUtils;
+
 /**
  *
  * @author alex
@@ -20,20 +21,36 @@ public class Garage {
     }
 
     public Garage() {
-       
+        Inserisci();
+    }
+
+    private void Inserisci() {
         //inserisco veicoli 
         //throw new IllegalArgumentException("errore");
         Scanner sc = new Scanner(System.in);
-        System.out.println("dimmi alimentazione?");
+        System.out.println("dimmi alimentazione?(b,d)");
         Auto.Alimentazione alimentazione = null;
         char ch;
         boolean invalid;
         do {
             invalid = false;
             try {
-                alimentazione = Auto.Alimentazione.valueOf(sc.nextLine().toUpperCase());
-                ch=sc.next().charAt(0);
-                System.out.println(ch);
+                //alimentazione = Auto.Alimentazione.valueOf(sc.nextLine().toUpperCase());
+                
+                
+                ch = Character.toUpperCase(sc.next().charAt(0));
+                //alimentazione = Auto.Alimentazione.valueOf(Character.toString(ch));
+                //System.out.println(ch);
+                switch (Character.toString(ch)){
+                    case "B":
+                        alimentazione=Auto.Alimentazione.Benzina;
+                        break;
+                    case "D":
+                        alimentazione=Auto.Alimentazione.Diesel;
+                        break;
+                    default:
+                        throw new IllegalArgumentException("Errore!!");
+                }
                 Auto A = new Auto(0, 4, alimentazione, "fiat", 2000, 1200);
                 elencoVeicoli[A.posto] = A;
                 System.out.println("Inserito " + A.toString());
@@ -41,6 +58,7 @@ public class Garage {
                 rimuovi(A.posto);
 
             } catch (IllegalArgumentException ex) {
+                System.out.println(ex);
                 System.out.println("Alim non valida riprova");
                 invalid = true;
             }
@@ -61,15 +79,15 @@ public class Garage {
     }
 
     private void rimuovi(int posto) {
-        String rimosso=elencoVeicoli[posto].toString();
-        elencoVeicoli=(Veicolo[]) ArrayUtils.remove(elencoVeicoli, posto);
+        String rimosso = elencoVeicoli[posto].toString();
+        elencoVeicoli = (Veicolo[]) ArrayUtils.remove(elencoVeicoli, posto);
         System.out.println("Rimosso: " + rimosso);
         stampaSituazione();
     }
 
     private void stampaSituazione() {
         String res = "Situazione Auto in garage:";
-        for (int i=0; i<elencoVeicoli.length; i++) {
+        for (int i = 0; i < elencoVeicoli.length; i++) {
             res += "\n" + elencoVeicoli[i];
         }
 
@@ -77,11 +95,9 @@ public class Garage {
     }
 
 }
-/**
- * 
- * @author alex
- */
+
 class Veicolo {
+
     protected int posto;
     protected String marca;
     protected int anno;
@@ -96,16 +112,15 @@ class Veicolo {
 
     @Override
     public String toString() {
-        return String.format(" posto) %s, marca %s, anno %s, cil. %s ", posto,marca, anno, cilindrata);
+        return String.format(" posto) %s, marca %s, anno %s, cil. %s ", posto, marca, anno, cilindrata);
     }
 
 }
 
 class Auto extends Veicolo {
 
-
     protected static enum Alimentazione {
-        B, D
+        Benzina, Diesel
     }
     protected int porte;
     //public String alim;
@@ -125,8 +140,9 @@ class Auto extends Veicolo {
     }
 
 }
+
 /**
- * 
+ *
  * @author alex
  */
 class Moto extends Veicolo {
@@ -158,7 +174,7 @@ class Furgone extends Veicolo {
     @Override
     public String toString() {
 
-        return super.toString()+ String.format(" capacità %s ", capacita);
+        return super.toString() + String.format(" capacità %s ", capacita);
     }
 
 }
