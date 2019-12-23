@@ -1,4 +1,5 @@
 package com.mycompany.garage;
+import static java.lang.System.in;
 import java.util.Scanner;
 import org.apache.commons.lang.ArrayUtils;
 /**
@@ -22,14 +23,17 @@ public class Garage {
        
         //inserisco veicoli 
         //throw new IllegalArgumentException("errore");
-        Scanner sc = new java.util.Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
         System.out.println("dimmi alimentazione?");
         Auto.Alimentazione alimentazione = null;
+        char ch;
         boolean invalid;
         do {
             invalid = false;
             try {
                 alimentazione = Auto.Alimentazione.valueOf(sc.nextLine().toUpperCase());
+                ch=sc.next().charAt(0);
+                System.out.println(ch);
                 Auto A = new Auto(0, 4, alimentazione, "fiat", 2000, 1200);
                 elencoVeicoli[A.posto] = A;
                 System.out.println("Inserito " + A.toString());
@@ -56,14 +60,14 @@ public class Garage {
 
     }
 
-    public void rimuovi(int posto) {
+    private void rimuovi(int posto) {
         String rimosso=elencoVeicoli[posto].toString();
         elencoVeicoli=(Veicolo[]) ArrayUtils.remove(elencoVeicoli, posto);
         System.out.println("Rimosso: " + rimosso);
         stampaSituazione();
     }
 
-    public void stampaSituazione() {
+    private void stampaSituazione() {
         String res = "Situazione Auto in garage:";
         for (int i=0; i<elencoVeicoli.length; i++) {
             res += "\n" + elencoVeicoli[i];
@@ -100,10 +104,10 @@ class Veicolo {
 class Auto extends Veicolo {
 
 
-    public static enum Alimentazione {
+    protected static enum Alimentazione {
         B, D
     }
-    private int porte;
+    protected int porte;
     //public String alim;
     Alimentazione alim;
 
@@ -127,7 +131,7 @@ class Auto extends Veicolo {
  */
 class Moto extends Veicolo {
 
-    private int tempi;
+    protected int tempi;
 
     public Moto(int posto, int tempi, String marca, int anno, int cilindrata) {
         super(posto, marca, anno, cilindrata);
@@ -144,7 +148,7 @@ class Moto extends Veicolo {
 
 class Furgone extends Veicolo {
 
-    private int capacita;
+    protected int capacita;
 
     public Furgone(int posto, int cpacita, String marca, int anno, int cilindrata) {
         super(posto, marca, anno, cilindrata);
