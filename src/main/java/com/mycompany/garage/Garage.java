@@ -11,6 +11,7 @@ public class Garage {
 
     final static int MAX = 4;
     Veicolo elencoVeicoli[] = new Veicolo[MAX];
+    Scanner sc = new Scanner(System.in);
 
     /**
      *
@@ -21,7 +22,14 @@ public class Garage {
     }
 
     public Garage() {
-        Inserisci();
+        int i, j = 0;
+        char ch, scelta;
+        do {
+            Inserisci();
+            System.out.print("continui?(s/n):");
+            scelta = sc.next().charAt(0);
+            j++;
+        } while (scelta != 'n' && j < MAX);//fine do-while
     }
 
     private void Inserisci() {
@@ -36,17 +44,16 @@ public class Garage {
             invalid = false;
             try {
                 //alimentazione = Auto.Alimentazione.valueOf(sc.nextLine().toUpperCase());
-                
-                
+
                 ch = Character.toUpperCase(sc.next().charAt(0));
                 //alimentazione = Auto.Alimentazione.valueOf(Character.toString(ch));
                 //System.out.println(ch);
-                switch (Character.toString(ch)){
+                switch (Character.toString(ch)) {
                     case "B":
-                        alimentazione=Auto.Alimentazione.Benzina;
+                        alimentazione = Auto.Alimentazione.Benzina;
                         break;
                     case "D":
-                        alimentazione=Auto.Alimentazione.Diesel;
+                        alimentazione = Auto.Alimentazione.Diesel;
                         break;
                     default:
                         throw new IllegalArgumentException("Errore!!");
@@ -55,7 +62,7 @@ public class Garage {
                 elencoVeicoli[A.posto] = A;
                 System.out.println("Inserito " + A.toString());
                 stampaSituazione();
-                rimuovi(A.posto);
+                //rimuovi(A.posto);
 
             } catch (IllegalArgumentException ex) {
                 System.out.println(ex);
@@ -73,8 +80,8 @@ public class Garage {
         elencoVeicoli[F.posto] = F;
         System.out.println("Inserito " + F.toString());
         stampaSituazione();
-        rimuovi(F.posto);
-        rimuovi(M.posto);
+        //rimuovi(F.posto);
+        //rimuovi(M.posto);
 
     }
 
